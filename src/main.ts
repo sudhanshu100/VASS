@@ -1,6 +1,22 @@
+import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { provideHttpClient } from '@angular/common/http';
+import { CodeEditorComponent } from './app/components/code-editor/code-editor.component';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CodeEditorComponent],
+  template: `
+    <app-code-editor></app-code-editor>
+  `,
+})
+export class App {
+  name = 'Code Editor';
+}
+
+bootstrapApplication(App, {
+  providers: [
+    provideHttpClient()
+  ]
+});
